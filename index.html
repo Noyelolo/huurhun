@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Цэцэг бэлэг 🌸</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: #f3eee9;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+
+  .stage {
+    width: 100%;
+    max-width: 520px;
+    min-height: 560px;
+    background: #fbf7f3;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  /* Intro */
+  .intro { text-align: center; transition: opacity 0.6s ease; }
+  .intro.hide { opacity: 0; }
+  .intro-title {
+    font-family: Georgia, serif;
+    font-size: 26px;
+    color: #3a2e2a;
+    margin-bottom: 8px;
+  }
+  .intro-sub { font-size: 15px; color: #8a7d77; margin-bottom: 28px; }
+  .btn {
+    font-size: 15px;
+    padding: 12px 28px;
+    border-radius: 8px;
+    background: #fbeaf0;
+    color: #993556;
+    border: 0.5px solid #ed93b1;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn:active { transform: scale(0.97); }
+
+  /* Bouquet */
+  .bouquet {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s ease;
+    text-align: center;
+    padding: 0 1rem;
+  }
+  .bouquet.show { opacity: 1; }
+  .msg-title {
+    font-family: Georgia, serif;
+    font-size: 22px;
+    color: #3a2e2a;
+    margin: 4px 0;
+  }
+  .msg { font-size: 14px; color: #8a7d77; max-width: 360px; }
+  .sig { font-size: 14px; color: #8a7d77; margin-top: 12px; font-style: italic; }
+
+  /* Flower bloom */
+  .flower { transform: scale(0); transform-box: fill-box; transform-origin: center bottom; }
+  .show .flower { animation: bloom 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+  .flower:nth-of-type(2) { animation-delay: 0.15s; }
+  .flower:nth-of-type(3) { animation-delay: 0.3s; }
+
+  @keyframes bloom {
+    0%   { transform: scale(0) rotate(-30deg); }
+    70%  { transform: scale(1.1) rotate(5deg); }
+    100% { transform: scale(1) rotate(0); }
+  }
+
+  /* Falling petals */
+  .petal-layer { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .petal {
+    position: absolute;
+    top: -20px;
+    border-radius: 50% 0 50% 50%;
+    animation: fall linear forwards;
+  }
+  @keyframes fall {
+    0%   { transform: translateY(-20px) rotate(0); opacity: 0.9; }
+    100% { transform: translateY(600px) rotate(360deg); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+  <div class="stage" id="stage" role="button" tabindex="0">
+
+    <div class="intro" id="intro">
+      <p class="intro-title" id="introTitle">Танд бэлэг бий</p>
+      <p class="intro-sub">энд дараарай bby</p>
+      <button class="btn" id="openBtn">Нээх</button>
+    </div>
+
+    <div class="bouquet" id="bouquet">
+      <svg width="320" height="380" viewBox="0 0 320 380" aria-label="Цэцгийн баглаа">
+        <line x1="160" y1="200" x2="160" y2="350" stroke="#3B6D11" stroke-width="6" stroke-linecap="round"/>
+        <line x1="130" y1="220" x2="160" y2="290" stroke="#3B6D11" stroke-width="5" stroke-linecap="round"/>
+        <line x1="190" y1="220" x2="160" y2="290" stroke="#3B6D11" stroke-width="5" stroke-linecap="round"/>
+        <path d="M130 250 Q105 235 100 260 Q120 268 130 250Z" fill="#639922"/>
+        <path d="M190 250 Q215 235 220 260 Q200 268 190 250Z" fill="#639922"/>
+
+        <g class="flower">
+          <circle cx="90" cy="130" r="22" fill="#D4537E"/><circle cx="55" cy="155" r="22" fill="#D4537E"/><circle cx="125" cy="155" r="22" fill="#D4537E"/><circle cx="68" cy="190" r="22" fill="#D4537E"/><circle cx="112" cy="190" r="22" fill="#D4537E"/>
+          <circle cx="90" cy="160" r="20" fill="#F4C0D1"/>
+        </g>
+        <g class="flower">
+          <circle cx="230" cy="130" r="22" fill="#EF9F27"/><circle cx="195" cy="155" r="22" fill="#EF9F27"/><circle cx="265" cy="155" r="22" fill="#EF9F27"/><circle cx="208" cy="190" r="22" fill="#EF9F27"/><circle cx="252" cy="190" r="22" fill="#EF9F27"/>
+          <circle cx="230" cy="160" r="20" fill="#FAC775"/>
+        </g>
+        <g class="flower">
+          <circle cx="160" cy="70" r="24" fill="#D85A30"/><circle cx="122" cy="98" r="24" fill="#D85A30"/><circle cx="198" cy="98" r="24" fill="#D85A30"/><circle cx="136" cy="138" r="24" fill="#D85A30"/><circle cx="184" cy="138" r="24" fill="#D85A30"/>
+          <circle cx="160" cy="104" r="22" fill="#F5C4B3"/>
+        </g>
+      </svg>
+      <p class="msg-title" id="msgTitle">Тэргэлд зориулж 🌸</p>
+      <p class="msg" id="msgText">Өдөр бүр чинь энэ цэцэг шиг дэлбээлэх болтугай</p>
+      <p class="sig" id="sigText" style="display:none"></p>
+    </div>
+
+    <div class="petal-layer" id="petalLayer"></div>
+  </div>
+
+<script>
+  // Query string-оор хувийн мэдээлэл уншина: ?to=Сараа&msg=...&from=Болд
+  var params = new URLSearchParams(location.search);
+  var to = params.get("to");
+  var msg = params.get("msg");
+  var from = params.get("from");
+
+  if (to) {
+    document.getElementById("introTitle").textContent = to + " бэлэг бий";
+    document.getElementById("msgTitle").textContent = to + " зориулж 🌸";
+  }
+  if (msg) document.getElementById("msgText").textContent = msg;
+  if (from) {
+    var sig = document.getElementById("sigText");
+    sig.textContent = "— " + from;
+    sig.style.display = "block";
+  }
+
+  var stage = document.getElementById("stage");
+  var intro = document.getElementById("intro");
+  var bouquet = document.getElementById("bouquet");
+  var petalLayer = document.getElementById("petalLayer");
+  var colors = ["#F4C0D1", "#FAC775", "#F5C4B3", "#ED93B1"];
+  var opened = false;
+
+  function rainPetals() {
+    var i = 0;
+    var timer = setInterval(function () {
+      var p = document.createElement("div");
+      p.className = "petal";
+      var size = 8 + Math.random() * 8;
+      p.style.left = (Math.random() * 100) + "%";
+      p.style.width = size + "px";
+      p.style.height = size + "px";
+      p.style.background = colors[i % colors.length];
+      p.style.animationDuration = (2.5 + Math.random() * 2) + "s";
+      petalLayer.appendChild(p);
+      setTimeout(function () { p.remove(); }, 5000);
+      if (++i >= 28) clearInterval(timer);
+    }, 120);
+  }
+
+  function open() {
+    if (opened) return;
+    opened = true;
+    intro.classList.add("hide");
+    setTimeout(function () {
+      intro.style.display = "none";
+      bouquet.classList.add("show");
+      rainPetals();
+    }, 600);
+  }
+
+  stage.addEventListener("click", open);
+  stage.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" || e.key === " ") open();
+  });
+</script>
+</body>
+</html>
